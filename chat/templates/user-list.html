@@ -1,0 +1,14 @@
+{% for user in user_list %}
+<li class="clearfix">
+  <div class="about">
+    <div class="name">{{ user.first_name }} {{ user.last_name }}</div>
+    <div class="status">
+        {% if user.userpresence.is_online %}
+        <i class="fa fa-circle  online"></i> online
+        {% else %}
+        <i class="fa fa-circle offline"></i> offline for {{ user.userpresence.last_seen|timesince }}
+        {% endif %}
+    </div>
+  </div>
+</li>
+{% endfor %}

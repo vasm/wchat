@@ -1,0 +1,61 @@
+{% extends "main.html" %}
+
+{% block title %}
+Messages
+{% endblock title %}
+
+{% block head %}
+<script type="text/javascript" src="/static/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+    var lastMessage = {{ last_message }}
+</script>
+<script type="text/javascript" src="/static/main.js"></script>
+
+{% endblock head %}
+
+{% block content %}
+<div class="container clearfix">
+    <div class="people-list" id="people-list">
+        <!--div class="search">
+            <input type="text" placeholder="search">
+            <i class="fa fa-search"></i>
+        </div-->
+        <ul class="list" id="contacts-list">
+            {% include 'user-list.html' %}
+        </ul>
+
+        <div class="options">
+            <div class="logout">
+                <a href="{% url 'logout' %}"><img class="logout-button" src="/static/logout.png" />Log out</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat">
+      {% if messages %}
+      <div class="chat-history" id="chat-history">
+        <ul id="message-list">
+            {% include 'message-list.html' %}
+        </ul>
+      </div> <!-- end chat-history -->
+      {% else %}
+          <p>{% trans "No messages yet..." %}</p>
+      {% endif %}
+
+      <div class="chat-message clearfix">
+        {% csrf_token %}
+        <textarea name="message-to-send" id="message-to-send" placeholder="{% trans "Type your message" %}" rows="3"></textarea>
+                
+        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i>
+        
+        <button id='send-message'>{% trans "Send" %}</button>
+
+      </div> <!-- end chat-message -->
+      
+    </div> <!-- end chat -->
+    {% if debug %}
+        <pre>{{ debug }}</pre>
+    {% endif %}
+</div>
+{% endblock content %}

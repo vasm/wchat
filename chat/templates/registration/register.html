@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% block title %}
+Register
+{% endblock title %}
+ 
+{% block content %}
+
+
+<div class="loginform clearfix">
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="formfield clearfix">
+            {% if field.errors %}<p class="formerror">{{ field.errors.as_text }}</p>{% endif %}
+            <div class="formlabel">{{ field.label_tag }}</div>
+            <div class="forminput {% if field.errors %}forminput-highlight{% endif %}">{{ field }}</div>
+        </div>
+        {% endfor %}        
+
+        <div class="formfield clearfix">
+            <input type="submit" value="Create user" />
+        </div>
+    </form>
+
+
+</div>
+
+{% endblock %}

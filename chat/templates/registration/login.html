@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+
+{% block title %}
+Log in
+{% endblock title %}
+ 
+{% block content %}
+
+
+
+<div class="loginform clearfix">
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="formfield clearfix">
+        <div class="formlabel">{{ form.username.label_tag }}</div>
+        <div class="forminput">{{ form.username }}</div>
+    </div>
+
+    <div class="formfield clearfix">
+        <div class="formlabel">{{ form.password.label_tag }}</div>
+        <div class="forminput">{{ form.password }}</div>
+    </div>
+
+    <div class="formfield clearfix">
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="/chat" />
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p class="password_reset"><a href="{% url 'register' %}">Register</a></p>
+    </div>
+</form>
+
+
+</div>
+
+{% endblock %}

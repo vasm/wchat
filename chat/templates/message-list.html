@@ -1,0 +1,17 @@
+{% for message in messages %}<li class="clearfix">
+    {% if message.sender.id != self_id %}<div class="message-data align-left">
+            <i class="fa fa-circle online"></i>
+            <span class="message-data-name">{{ message.sender.first_name }}&nbsp;{{ message.sender.last_name }} </span>
+            <span class="message-data-time">{{ message.timestamp }}</span> &nbsp; &nbsp;
+        </div>
+        <div class="message my-message float-left">
+            {{ message.text }}
+        </div>
+    {% else %}<div class="message-data align-right">
+            <span class="message-data-time">{{ message.timestamp }}</span> &nbsp; &nbsp;
+            <span class="message-data-name">{{ message.sender.first_name }}&nbsp;{{ message.sender.last_name }} </span><i class="fa fa-circle me"></i>                  
+        </div>
+        <div class="message other-message float-right">
+            {{ message.text }}
+        </div>{% endif %}</li>
+  {% endfor %}
